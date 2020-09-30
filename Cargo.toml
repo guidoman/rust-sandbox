@@ -1,0 +1,17 @@
+[package]
+name = "rust-sandbox"
+version = "0.1.0"
+authors = ["Guido Casiraghi <guido.casiraghi@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "trie"
+path = "src/trie.rs"
+
+[[bin]]
+name = "something"
+path = "src/something.rs"
+
+[dependencies]
+rand = "0.7"
