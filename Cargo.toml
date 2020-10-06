@@ -13,5 +13,10 @@ path = "src/trie.rs"
 name = "something"
 path = "src/something.rs"
 
+[[bin]]
+name = "russian_train"
+path = "src/russian_train.rs"
+
 [dependencies]
 rand = "0.7"
+itertools = "0.9"
