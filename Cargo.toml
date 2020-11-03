@@ -1,5 +1,6 @@
 [package]
 name = "rust-sandbox"
+edition = "2018"
 version = "0.1.0"
 authors = ["Guido Casiraghi <guido.casiraghi@gmail.com>"]
 
@@ -17,6 +18,20 @@ path = "src/something.rs"
 name = "russian_train"
 path = "src/russian_train.rs"
 
+[[bin]]
+name = "file_log_append"
+path = "src/file_log_append.rs"
+
+[[bin]]
+name = "threads_exp"
+path = "src/threads_exp.rs"
+
+[[bin]]
+name = "get_file_to_write"
+path = "src/get_file_to_write.rs"
+
 [dependencies]
 rand = "0.7"
 itertools = "0.9"
+crossbeam-utils = "0.8"
+tempfile = "3.1"
