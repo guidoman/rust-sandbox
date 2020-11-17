@@ -30,8 +30,18 @@ path = "src/threads_exp.rs"
 name = "get_file_to_write"
 path = "src/get_file_to_write.rs"
 
+[[bin]]
+name = "add_entry"
+path = "src/add_entry.rs"
+
+[[bin]]
+name = "load_data"
+path = "src/load_data.rs"
+
 [dependencies]
 rand = "0.7"
 itertools = "0.9"
 crossbeam-utils = "0.8"
 tempfile = "3.1"
+byteorder = "1.3"
+
