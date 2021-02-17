@@ -1,13 +1,13 @@
-use std::fs;
-use std::str;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Seek, SeekFrom, Write};
+use std::str;
+use std::{fs, io};
 
 use byteorder::{ByteOrder, LittleEndian};
 
-fn read_entry(file: &mut std::fs::File, offset: u64) -> u64 {
+fn read_entry(file: &mut std::fs::File, offset: u64) -> io::Result<u64> {
     let mut total_read_size = 0;
-    file.seek(SeekFrom::Start(offset)).expect("cannot seek file");
+    file.seek(SeekFrom::Start(offset))?;
 
     let mut buf = [0; 2];
     let read_size = file.read(&mut buf).unwrap();
@@ -18,7 +18,8 @@ fn read_entry(file: &mut std::fs::File, offset: u64) -> u64 {
 
     // content size
     // offset += 2;
-    file.seek(SeekFrom::Start(offset + total_read_size)).expect("cannot seek file");
+    file.seek(SeekFrom::Start(offset + total_read_size))
+        .expect("cannot seek file");
     let mut buf = [0; 8];
     let read_size = file.read(&mut buf).unwrap();
     println!("Read size = {}", read_size);
@@ -34,24 +35,23 @@ fn read_entry(file: &mut std::fs::File, offset: u64) -> u64 {
     println!("{:?}", content);
     total_read_size += content_size;
 
-    return total_read_size;
+    return Ok(total_read_size);
 }
 
-
-fn main() {
+fn main() -> io::Result<()> {
     println!("load_data");
     let mut file = File::open("1.guidcask").unwrap();
 
     // key
-    let mut offset : u64 = 0;
-    
+    let mut offset: u64 = 0;
 
-    let read_size = read_entry(&mut file, offset);
+    let read_size = read_entry(&mut file, offset)?;
     println!("First entry read size = {}", read_size);
 
     offset += read_size;
 
-    let read_size = read_entry(&mut file, offset);
+    let read_size = read_entry(&mut file, offset)?;
     println!("Second entry read size = {}", read_size);
 
+    return Ok(());
 }
